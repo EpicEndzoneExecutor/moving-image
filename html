@@ -1,0 +1,77 @@
+<!-- Gabriel Hurtado -->
+<!-- HTML document to create Start and Stop buttons and move a meme image -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Image Mover</title>
+    <style>
+        /* Styling the buttons and image */
+        body {
+            background-color: lightblue;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #meme {
+            position: absolute;
+            top: 200px;
+            left: 200px;
+        }
+        button {
+            margin: 20px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Start button -->
+    <button id="startButton" onclick="startMovement()">Start</button>
+    <!-- Stop button -->
+    <button id="stopButton" onclick="stopMovement()" disabled>Stop</button>
+
+    <!-- Meme image to be moved -->
+    <img id="meme" src="https://i.imgflip.com/8mvc1p.jpg" alt="Meme Image" width="200">
+
+    <!-- JavaScript code to add interactivity -->
+    <script>
+        // Variables to store movement interval and meme element
+        let movementInterval;
+        const meme = document.getElementById("meme");
+
+        // Function to start the movement of the meme image
+        function startMovement() {
+            // Disable the start button and enable the stop button
+            document.getElementById("startButton").disabled = true;
+            document.getElementById("stopButton").disabled = false;
+
+            // Set an interval to move the meme image around
+            movementInterval = setInterval(moveMeme, 100);
+        }
+
+        // Function to stop the movement of the meme image
+        function stopMovement() {
+            // Disable the stop button and enable the start button
+            document.getElementById("stopButton").disabled = true;
+            document.getElementById("startButton").disabled = false;
+
+            // Clear the interval to stop the movement
+            clearInterval(movementInterval);
+        }
+
+        // Function to move the meme image to a random position
+        function moveMeme() {
+            // Get random x and y positions within the window bounds
+            const x = Math.floor(Math.random() * (window.innerWidth - meme.width));
+            const y = Math.floor(Math.random() * (window.innerHeight - meme.height));
+
+            // Set the meme image position
+            meme.style.left = x + "px";
+            meme.style.top = y + "px";
+        }
+    </script>
+
+</body>
+</html>
